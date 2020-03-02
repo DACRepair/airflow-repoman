@@ -1,0 +1,2 @@
+recursive-include airflow_repoman/templates *
+# recursive-include airflow_repoman/static *

@@ -11,6 +11,9 @@ setup(
     url="https://github.com/DACRepair/airflow-repoman",
 
     packages=find_packages(),
+
+    include_package_data=True,
+
     entry_points={
         'airflow.plugins': [
             'airflow_repoman = airflow_repoman.plugin:RepomanAirflowPlugin'
