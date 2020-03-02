@@ -2,6 +2,8 @@ from flask_appbuilder import BaseView, expose
 
 
 class TestView(BaseView):
+    default_view = "index"
+
     @expose('/')
-    def list(self):
+    def index(self):
         return self.default_view
