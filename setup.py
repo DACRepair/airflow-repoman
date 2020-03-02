@@ -13,7 +13,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'airflow.plugins': [
-            'my_plugin = airflow_repoman.plugin:RepomanAirflowPlugin'
+            'airflow_repoman = airflow_repoman.plugin:RepomanAirflowPlugin'
         ]
     }
 )
