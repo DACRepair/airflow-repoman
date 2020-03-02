@@ -5,5 +5,3 @@ class TestView(BaseView):
     @expose('/')
     def index(self):
         return "Potato"
-
-
