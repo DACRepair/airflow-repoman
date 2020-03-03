@@ -1,6 +1,6 @@
+from airflow.www.forms import FlaskForm
 from flask import Blueprint
 from flask_appbuilder import ModelView
-from flask_appbuilder.forms import DynamicForm, FlaskForm
 from flask_appbuilder.fieldwidgets import BS3TextFieldWidget, BS3PasswordFieldWidget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_babel import lazy_gettext
