@@ -14,3 +14,4 @@ class RepomanAirflowPlugin(AirflowPlugin):
     appbuilder_views = [{"name": "DAG Repos",
                          "category": "Admin",
                          "view": RepomanView()}]
+
