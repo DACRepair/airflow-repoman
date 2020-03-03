@@ -42,5 +42,5 @@ class RepomanView(ModelView):
     show_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'remote_user', 'remote_pass', 'refresh']
     add_columns = show_columns
     edit_columns = add_columns
-    add_form = RepomanForm
-    edit_form = RepomanForm
+    add_form = RepomanForm()
+    edit_form = RepomanForm()
