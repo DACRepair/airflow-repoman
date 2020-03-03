@@ -1,5 +1,6 @@
 from flask import Blueprint
-from airflow.www.views import AirflowModelView
+from flask_appbuilder import ModelView
+from flask_appbuilder.models.sqla.interface import SQLAInterface
 from airflow_repoman.models import Repos
 
 RepomanBlueprint = Blueprint(
@@ -11,10 +12,10 @@ RepomanBlueprint = Blueprint(
 )
 
 
-class RepomanView(AirflowModelView):
+class RepomanView(ModelView):
     route_base = "/repos"
 
-    datamodel = AirflowModelView.CustomSQLAInterface(Repos)
+    datamodel = SQLAInterface(Repos)
 
     base_permissions = ['can_list']
 
