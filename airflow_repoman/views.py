@@ -26,7 +26,7 @@ class RepomanForm(DynamicForm):
     remote_pass = PasswordField(lazy_gettext('Repo Password'), widget=BS3PasswordFieldWidget(), validators=[Optional()])
 
     refresh = IntegerField(lazy_gettext('Refresh Interval'), widget=BS3TextFieldWidget(),
-                           validators=[NumberRange(min=0, max=99999999)])
+                           validators=[NumberRange(min=0)])
 
 
 class RepomanView(ModelView):
