@@ -28,19 +28,23 @@ class RepomanForm(FlaskForm):
     refresh = IntegerField(lazy_gettext('Refresh Interval'), widget=BS3TextFieldWidget(),
                            validators=[NumberRange(min=0)])
 
+    def __init__(self, formdata: object, **kwargs):
+        print(formdata)
+        print(kwargs)
+        super(RepomanForm, self).__init__(formdata, **kwargs)
+
 
 class RepomanView(ModelView):
     route_base = "/repos"
     datamodel = SQLAInterface(Repos)
 
     search_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'last_updated']
-
     label_columns = {'name': 'Repo Name', 'enabled': 'Repo Enabled', 'remote_url': 'Remote URL',
                      'remote_branch': 'Remote Branch', 'refresh': 'Refresh (Seconds)', 'last_updated': 'Last Updated'}
     list_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'refresh', 'last_updated']
-
     show_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'remote_user', 'remote_pass', 'refresh']
     add_columns = show_columns
     edit_columns = add_columns
+
     add_form = RepomanForm
     edit_form = RepomanForm
