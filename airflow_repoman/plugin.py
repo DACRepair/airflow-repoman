@@ -11,6 +11,6 @@ class RepomanAirflowPlugin(AirflowPlugin):
 
     name = "airflow_repoman"
     flask_blueprints = [RepomanBlueprint]
-    appbuilder_views = [{"name": "Repos",
+    appbuilder_views = [{"name": "DAG Repos",
                          "category": "Admin",
                          "view": RepomanView()}]
