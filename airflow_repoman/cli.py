@@ -1,5 +1,13 @@
 import click
 
-@click.command()
+
+@click.group()
 def main():
-    click.echo("woop")
+    pass
+
+
+@main.command()
+def init():
+    from .models import Base
+    from airflow import settings
+    Base.metadata.create_all(settings.engine)
