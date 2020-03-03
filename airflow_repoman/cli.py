@@ -11,8 +11,11 @@ def main():
 def initdb():
     from airflow import settings
     from airflow_repoman.models import Base
-
-    log.info(Base.metadata.create_all(settings.engine))
+    try:
+        Base.metadata.create_all(settings.engine)
+        log.info("Initialized database.")
+    except Exception as E:
+        log.error("Unable to initialize database: {}", format(str(E)))
 
 
 @main.command(help="")
@@ -31,7 +34,6 @@ def reposync():
     for path in glob(os.path.normpath(dag_path + "/*")):
         path = os.path.basename(path)
         print(path)
-
 
 
 if __name__ == "__main__":
