@@ -1,5 +1,7 @@
 from flask import Blueprint
-from flask_appbuilder import BaseView, expose
+from flask_appbuilder import ModelView
+from flask_appbuilder.models.sqla.interface import SQLAInterface
+from airflow_repoman.models import Repos
 
 RepomanBlueprint = Blueprint(
     "airflow_repoman",
@@ -10,9 +12,5 @@ RepomanBlueprint = Blueprint(
 )
 
 
-class RepomanView(BaseView):
-    default_view = "index"
-
-    @expose('/')
-    def index(self):
-        return self.render_template('test.html')
+class RepomanView(ModelView):
+    datamodel = SQLAInterface(Repos)
