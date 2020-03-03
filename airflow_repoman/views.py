@@ -24,7 +24,7 @@ class RepomanForm(DynamicForm):
     remote_user = StringField('Repo Username', widget=BS3TextFieldWidget())
     remote_pass = PasswordField('Repo Password', widget=BS3PasswordFieldWidget())
 
-    refresh = IntegerField('Refresh Interval')
+    refresh = StringField('Refresh Interval', widget=BS3TextFieldWidget())
 
 
 class RepomanView(ModelView):
