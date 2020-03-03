@@ -22,7 +22,10 @@ def reposync():
     from glob import glob
 
     dag_path = os.path.normpath(settings.conf.get('core', 'dags_folder'))
+    os.mkdir(dag_path) if not os.path.isdir(dag_path) else None
+
     for path in glob(os.path.normpath(dag_path + "/*")):
+        path = os.path.basename(path)
         print(path)
 
 
