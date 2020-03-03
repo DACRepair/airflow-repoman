@@ -22,7 +22,9 @@ def reposync():
     from airflow import settings
     from glob import glob
 
-    dag_path = settings.conf.get('core', 'dags_folder')
+    dag_path = os.path.normpath(settings.conf.get('core', 'dags_folder'))
+    for path in glob(os.path.normpath(dag_path + "/*")):
+        print(path)
 
 
 if __name__ == "__main__":
