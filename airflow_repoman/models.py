@@ -17,7 +17,7 @@ class Repos(Base):
     remote_branch = Column(String(64), default='master')
 
     remote_user = Column(String(5000), default=None, nullable=True)
-    remote_pass = Column(EncryptedType(String(5000), FernetEngine, conf.get('core', 'fernet_key', fallback=None)))
+    remote_pass = Column(EncryptedType(String(5000), conf.get('core', 'fernet_key', fallback=None), FernetEngine))
 
     refresh = Column(Integer, default=600)
     last_updated = Column(DateTime, default=datetime.datetime.utcnow())
