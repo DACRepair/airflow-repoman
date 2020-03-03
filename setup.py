@@ -17,6 +17,7 @@ setup(
     entry_points={
         'airflow.plugins': [
             'airflow_repoman = airflow_repoman.plugin:RepomanAirflowPlugin'
-        ]
+        ],
+        'console_scripts': ['airflow_repoman.cli:main']
     }
 )
