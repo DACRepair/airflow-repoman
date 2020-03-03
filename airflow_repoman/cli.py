@@ -8,6 +8,7 @@ def main():
 
 @main.command()
 def init():
-    from .models import Base
     from airflow import settings
+    from airflow_repoman.models import Base
+
     Base.metadata.create_all(settings.engine)
