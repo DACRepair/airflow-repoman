@@ -16,7 +16,6 @@ def initdb():
 
 
 @main.command(help="")
-@click.option("")
 def reposync():
     import os
     from airflow import settings
