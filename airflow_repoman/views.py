@@ -14,3 +14,7 @@ RepomanBlueprint = Blueprint(
 
 class RepomanView(ModelView):
     datamodel = SQLAInterface(Repos)
+
+    label_columns = {'name': 'Repo Name', 'enabled': 'Repo Enabled', 'remote_url': 'Remote URL',
+                     'remote_branch': 'Remote Branch', 'refresh': 'Refresh (Seconds)', 'last_updated': 'Last Updated'}
+    list_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'refresh', 'last_updated']
