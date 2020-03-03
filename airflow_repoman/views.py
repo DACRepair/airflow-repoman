@@ -14,8 +14,7 @@ class RepomanView(ModelView):
     route_base = "/repos"
     datamodel = SQLAInterface(Repos)
 
-    base_permissions = ['can_list']
-    search_columns = ['name']
+    search_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'last_updated']
 
     label_columns = {'name': 'Repo Name', 'enabled': 'Repo Enabled', 'remote_url': 'Remote URL',
                      'remote_branch': 'Remote Branch', 'refresh': 'Refresh (Seconds)', 'last_updated': 'Last Updated'}
