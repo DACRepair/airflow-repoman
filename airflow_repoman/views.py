@@ -1,10 +1,10 @@
 from flask import Blueprint
 from flask_appbuilder import ModelView
-from flask_appbuilder.forms import DynamicForm, StringField, BooleanField
+from flask_appbuilder.forms import DynamicForm
 from flask_appbuilder.fieldwidgets import BS3TextFieldWidget, BS3PasswordFieldWidget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_babel import lazy_gettext
-from wtforms import PasswordField, IntegerField
+from wtforms import PasswordField, StringField, BooleanField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
 from airflow_repoman.models import Repos
@@ -23,8 +23,8 @@ class RepomanForm(DynamicForm):
     remote_branch = StringField(lazy_gettext('Repo Branch'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
     remote_user = StringField(lazy_gettext('Repo Username'), widget=BS3TextFieldWidget(), validators=[Optional()])
     remote_pass = PasswordField(lazy_gettext('Repo Password'), widget=BS3PasswordFieldWidget(), validators=[Optional()])
-    refresh = IntegerField(lazy_gettext('Refresh Interval'), widget=BS3TextFieldWidget(),
-                           validators=[NumberRange(min=0)], default=600)
+    refresh = StringField(lazy_gettext('Refresh Interval'), widget=BS3TextFieldWidget(),
+                          validators=[NumberRange(min=0)])
 
 
 class RepomanView(ModelView):
