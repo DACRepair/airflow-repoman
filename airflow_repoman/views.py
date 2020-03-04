@@ -30,7 +30,7 @@ class RepomanForm(DynamicForm):
 
 class RepomanView(AirflowModelView):
     route_base = "/repo"
-    datamodel = SQLAInterface(Repos)
+    datamodel = AirflowModelView.CustomSQLAInterface(Repos)
 
     base_permissions = ['can_add', 'can_list', 'can_edit', 'can_delete']
     base_order = ('name', 'asc')
