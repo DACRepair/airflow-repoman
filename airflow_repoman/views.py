@@ -7,6 +7,8 @@ from flask_babel import lazy_gettext
 from wtforms import PasswordField, StringField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
+from airflow.logging_config import log
+
 from airflow_repoman.models import Repos
 
 RepomanBlueprint = Blueprint("airflow_repoman",
@@ -17,6 +19,10 @@ RepomanBlueprint = Blueprint("airflow_repoman",
 
 
 class RepomanForm(DynamicForm):
+    def __init__(self, formdata: object, **kwargs):
+        print(formdata)
+        super(RepomanForm, self).__init__(formdata, **kwargs)
+
     name = StringField(lazy_gettext('Repo Name'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
     enabled = BooleanField(lazy_gettext('Repo Enabled'))
     remote_url = StringField(lazy_gettext('Repo URL'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
