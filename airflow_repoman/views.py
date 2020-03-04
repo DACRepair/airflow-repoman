@@ -20,7 +20,7 @@ RepomanBlueprint = Blueprint("airflow_repoman",
 
 class RepomanForm(DynamicForm):
     def __init__(self, formdata: object, **kwargs):
-        print(formdata)
+        log.error(str(formdata))
         super(RepomanForm, self).__init__(formdata, **kwargs)
 
     name = StringField(lazy_gettext('Repo Name'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
