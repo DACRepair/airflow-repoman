@@ -6,7 +6,6 @@ from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_babel import lazy_gettext
 from wtforms.fields import BooleanField, IntegerField, PasswordField, StringField
 from wtforms.validators import DataRequired, Optional, NumberRange
-from airflow.www.views import AirflowModelView
 
 from airflow_repoman.models import Repos
 
@@ -28,9 +27,9 @@ class RepomanForm(DynamicForm):
                            validators=[NumberRange(min=0)])
 
 
-class RepomanView(AirflowModelView):
+class RepomanView(ModelView):
     route_base = "/repo"
-    datamodel = AirflowModelView.CustomSQLAInterface(Repos)
+    datamodel = SQLAInterface(Repos)
 
     base_permissions = ['can_add', 'can_list', 'can_edit', 'can_delete']
     base_order = ('name', 'asc')
