@@ -4,7 +4,8 @@ from flask_appbuilder.forms import DynamicForm
 from flask_appbuilder.fieldwidgets import BS3TextFieldWidget, BS3PasswordFieldWidget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_babel import lazy_gettext
-from wtforms import PasswordField, StringField, BooleanField, IntegerField
+from wtforms.fields.simple import PasswordField, StringField, BooleanField
+from wtforms.fields.html5 import IntegerField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
 from airflow.logging_config import log
@@ -19,10 +20,6 @@ RepomanBlueprint = Blueprint("airflow_repoman",
 
 
 class RepomanForm(DynamicForm):
-    def __init__(self, formdata, **kwargs):
-        print(formdata)
-        print(kwargs)
-
     name = StringField(lazy_gettext('Repo Name'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
     enabled = BooleanField(lazy_gettext('Repo Enabled'))
     remote_url = StringField(lazy_gettext('Repo URL'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
@@ -51,4 +48,5 @@ class RepomanView(ModelView):
 
     show_columns = edit_columns.copy()
     show_columns.append('last_updated')
+
     add_form = edit_form = RepomanForm
