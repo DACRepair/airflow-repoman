@@ -19,9 +19,9 @@ RepomanBlueprint = Blueprint("airflow_repoman",
 
 
 class RepomanForm(DynamicForm):
-    def __init__(self, formdata: object, **kwargs):
-        log.error(str(formdata))
-        super(RepomanForm, self).__init__(formdata, **kwargs)
+    def __init__(self, formdata, **kwargs):
+        print(formdata)
+        print(kwargs)
 
     name = StringField(lazy_gettext('Repo Name'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
     enabled = BooleanField(lazy_gettext('Repo Enabled'))
