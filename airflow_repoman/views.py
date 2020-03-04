@@ -7,6 +7,8 @@ from flask_babel import lazy_gettext
 from wtforms.fields import BooleanField, IntegerField, PasswordField, StringField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
+from airflow.logging_config import log
+
 from airflow_repoman.models import Repos
 
 RepomanBlueprint = Blueprint("airflow_repoman",
@@ -29,9 +31,10 @@ class RepomanForm(DynamicForm):
 
 class RepomanView(ModelView):
     def register_form(self, *args, **kwargs):
-        print(args)
-        print(kwargs)
-        return RepomanForm
+        log.info("GENERATING FORM")
+        log.info(str(args))
+        log.info(str(kwargs))
+        return RepomanForm(*args, **kwargs)
 
     route_base = "/repo"
     datamodel = SQLAInterface(Repos)
