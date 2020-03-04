@@ -11,7 +11,7 @@ class Repos(Base):
     id = Column(Integer(), primary_key=True, autoincrement=True)
 
     name = Column(String(255))
-    enabled = Column(Boolean, default=True)
+    enabled = Column(Boolean(), default=True)
 
     remote_url = Column(String(2048), nullable=False)
     remote_branch = Column(String(64), default='master')
@@ -19,5 +19,5 @@ class Repos(Base):
     remote_user = Column(String(5000), default=None, nullable=True)
     remote_pass = Column(EncryptedType(String(5000), conf.get('core', 'fernet_key', fallback=None), FernetEngine))
 
-    refresh = Column(Integer(), default=600)
-    last_updated = Column(DateTime, default=datetime.datetime.utcnow())
+    refresh = Column(Integer())
+    last_updated = Column(DateTime(), default=datetime.datetime.utcnow())
