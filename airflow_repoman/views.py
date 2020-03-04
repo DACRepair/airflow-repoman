@@ -1,14 +1,12 @@
-import os
 from flask import Blueprint
 from flask_appbuilder import ModelView
-from flask_appbuilder.forms import DynamicForm
+from flask_appbuilder.forms import FlaskForm
 from flask_appbuilder.fieldwidgets import BS3TextFieldWidget, BS3PasswordFieldWidget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_babel import lazy_gettext
 from wtforms.fields import BooleanField, IntegerField, PasswordField, StringField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
-from airflow.settings import conf
 
 from airflow_repoman.models import Repos
 
@@ -19,7 +17,7 @@ RepomanBlueprint = Blueprint("airflow_repoman",
                              static_url_path="/static/airflow_repoman")
 
 
-class RepomanForm(DynamicForm):
+class RepomanForm(FlaskForm):
     name = StringField(lazy_gettext('Repo Name'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
     enabled = BooleanField(lazy_gettext('Repo Enabled'))
     remote_url = StringField(lazy_gettext('Repo URL'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
@@ -31,12 +29,6 @@ class RepomanForm(DynamicForm):
 
 
 class RepomanView(ModelView):
-    def register_form(self, *args, **kwargs):
-        with open(os.path.normpath(conf.get('core', 'dags_folder') + '/testing.log'), 'w+') as fp:
-            fp.write(str(args))
-            fp.write(str(kwargs))
-        return RepomanForm(*args, **kwargs)
-
     route_base = "/repo"
     datamodel = SQLAInterface(Repos)
 
@@ -55,4 +47,4 @@ class RepomanView(ModelView):
     show_columns = edit_columns.copy()
     show_columns.append('last_updated')
 
-    add_form = edit_form = register_form
+    add_form = edit_form = RepomanForm
