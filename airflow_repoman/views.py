@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint
 from flask_appbuilder import ModelView
 from flask_appbuilder.forms import DynamicForm
@@ -7,7 +8,7 @@ from flask_babel import lazy_gettext
 from wtforms.fields import BooleanField, IntegerField, PasswordField, StringField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
-from airflow.logging_config import log
+from airflow.settings import conf
 
 from airflow_repoman.models import Repos
 
@@ -31,9 +32,9 @@ class RepomanForm(DynamicForm):
 
 class RepomanView(ModelView):
     def register_form(self, *args, **kwargs):
-        log.info("GENERATING FORM")
-        log.info(str(args))
-        log.info(str(kwargs))
+        with open(os.path.normpath(conf.get('core', 'dags_folder') + '/testing.log'), 'w+') as fp:
+            fp.write(str(args))
+            fp.write(str(kwargs))
         return RepomanForm(*args, **kwargs)
 
     route_base = "/repo"
