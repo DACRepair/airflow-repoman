@@ -31,7 +31,7 @@ class RepomanView(ModelView):
     def register_form(self, *args, **kwargs):
         print(args)
         print(kwargs)
-        return RepomanForm()
+        return RepomanForm
 
     route_base = "/repo"
     datamodel = SQLAInterface(Repos)
