@@ -28,6 +28,11 @@ class RepomanForm(DynamicForm):
 
 
 class RepomanView(ModelView):
+    def register_form(self, *args, **kwargs):
+        print(args)
+        print(kwargs)
+        return RepomanForm()
+
     route_base = "/repo"
     datamodel = SQLAInterface(Repos)
 
@@ -46,4 +51,4 @@ class RepomanView(ModelView):
     show_columns = edit_columns.copy()
     show_columns.append('last_updated')
 
-    add_form = edit_form = RepomanForm
+    add_form = edit_form = register_form(True)
