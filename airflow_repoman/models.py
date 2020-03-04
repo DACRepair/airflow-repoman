@@ -8,7 +8,7 @@ from sqlalchemy_utils.types.encrypted.encrypted_type import FernetEngine
 
 class Repos(Base):
     __tablename__ = "repoman_repos"
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer(), primary_key=True, autoincrement=True)
 
     name = Column(String(255))
     enabled = Column(Boolean, default=True)
@@ -19,5 +19,5 @@ class Repos(Base):
     remote_user = Column(String(5000), default=None, nullable=True)
     remote_pass = Column(EncryptedType(String(5000), conf.get('core', 'fernet_key', fallback=None), FernetEngine))
 
-    refresh = Column(Integer, default=600)
+    refresh = Column(Integer(), default=600)
     last_updated = Column(DateTime, default=datetime.datetime.utcnow())

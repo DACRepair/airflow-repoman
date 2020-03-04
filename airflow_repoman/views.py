@@ -4,7 +4,7 @@ from flask_appbuilder.forms import DynamicForm
 from flask_appbuilder.fieldwidgets import BS3TextFieldWidget, BS3PasswordFieldWidget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_babel import lazy_gettext
-from wtforms.fields import (BooleanField, IntegerField, PasswordField, StringField, )
+from wtforms.fields import BooleanField, IntegerField, PasswordField, StringField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
 from airflow_repoman.models import Repos
@@ -38,7 +38,6 @@ class RepomanView(ModelView):
                      'remote_branch': 'Remote Branch', 'refresh': 'Refresh (Seconds)', 'last_updated': 'Last Updated'}
 
     search_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'last_updated']
-
     list_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'refresh', 'last_updated']
 
     add_columns = edit_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'remote_user',
