@@ -51,4 +51,4 @@ class RepomanView(ModelView):
     show_columns = edit_columns.copy()
     show_columns.append('last_updated')
 
-    add_form = edit_form = register_form(True)
+    add_form = edit_form = register_form
