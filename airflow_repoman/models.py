@@ -1,4 +1,5 @@
 import datetime
+
 from airflow.models.base import Base
 from airflow.settings import conf
 from sqlalchemy import Boolean, Column, DateTime, Integer, String
@@ -20,4 +21,6 @@ class DAGRepo(Base):
     remote_pass = Column(EncryptedType(String(5000), conf.get('core', 'fernet_key', fallback=None), FernetEngine))
 
     interval = Column(Integer(), default=600)
+
+    last_checked = Column(DateTime(), default=datetime.datetime.utcnow())
     last_updated = Column(DateTime(), default=datetime.datetime.utcnow())

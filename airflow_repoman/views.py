@@ -1,6 +1,6 @@
 from flask_appbuilder import ModelView
-from flask_appbuilder.forms import DynamicForm
 from flask_appbuilder.fieldwidgets import BS3TextFieldWidget, BS3PasswordFieldWidget
+from flask_appbuilder.forms import DynamicForm
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_babel import lazy_gettext
 from wtforms.fields import BooleanField, IntegerField, PasswordField, StringField

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="airflow_repoman",
-    version="0.0.1",
+    version="0.0.2",
 
     author="Derek Vance",
     author_email="DACRepair@gmail.com",
@@ -12,6 +12,9 @@ setup(
 
     packages=find_packages(),
     include_package_data=True,
+    install_requires=['apache-airflow',
+                      'click',
+                      'gitpython'],
 
     entry_points={'airflow.plugins': ['airflow_repoman = airflow_repoman.plugin:RepomanAirflowPlugin'],
                   'console_scripts': ['airflow-repoman=airflow_repoman.cli:main']}
