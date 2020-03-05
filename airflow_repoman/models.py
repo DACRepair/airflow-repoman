@@ -6,7 +6,7 @@ from sqlalchemy_utils import EncryptedType
 from sqlalchemy_utils.types.encrypted.encrypted_type import FernetEngine
 
 
-class Repos(Base):
+class DAGRepo(Base):
     __tablename__ = "repoman_repos"
     id = Column(Integer(), primary_key=True, autoincrement=True)
 

@@ -23,13 +23,13 @@ def reposync():
     import os
     from glob import glob
     from airflow import settings
-    from airflow_repoman.models import Repos
+    from airflow_repoman.models import DAGRepo
 
     dag_path = os.path.normpath(settings.conf.get('core', 'dags_folder'))
     os.mkdir(dag_path) if not os.path.isdir(dag_path) else None
 
     session = settings.Session()
-    repos = session.query(Repos).filter(Repos.enabled)
+    repos = session.query(DAGRepo).filter(DAGRepo.enabled)
 
     for path in glob(os.path.normpath(dag_path + "/*")):
         path = os.path.basename(path)
