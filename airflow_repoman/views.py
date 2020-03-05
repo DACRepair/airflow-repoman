@@ -23,7 +23,7 @@ class RepomanForm(DynamicForm):
     remote_branch = StringField(lazy_gettext('Repo Branch'), widget=BS3TextFieldWidget(), validators=[DataRequired()])
     remote_user = StringField(lazy_gettext('Repo Username'), widget=BS3TextFieldWidget(), validators=[Optional()])
     remote_pass = PasswordField(lazy_gettext('Repo Password'), widget=BS3PasswordFieldWidget(), validators=[Optional()])
-    refresh = IntegerField(lazy_gettext('Refresh Interval'), widget=BS3TextFieldWidget(),
+    interval = IntegerField(lazy_gettext('Refresh Interval'), widget=BS3TextFieldWidget(),
                            validators=[NumberRange(min=0)])
 
 
@@ -35,13 +35,13 @@ class RepomanView(ModelView):
     base_order = ('name', 'asc')
 
     label_columns = {'name': 'Repo Name', 'enabled': 'Repo Enabled', 'remote_url': 'Remote URL',
-                     'remote_branch': 'Remote Branch', 'refresh': 'Refresh (Seconds)', 'last_updated': 'Last Updated'}
+                     'remote_branch': 'Remote Branch', 'interval': 'Refresh (Seconds)', 'last_updated': 'Last Updated'}
 
     search_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'last_updated']
-    list_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'refresh', 'last_updated']
+    list_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'interval', 'last_updated']
 
     add_columns = edit_columns = ['name', 'enabled', 'remote_url', 'remote_branch', 'remote_user',
-                                  'remote_pass', 'refresh']
+                                  'remote_pass', 'interval']
 
     show_columns = edit_columns.copy()
     show_columns.append('last_updated')
