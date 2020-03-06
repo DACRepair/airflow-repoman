@@ -21,7 +21,6 @@ def initdb():
 @main.command(help="")
 def reposync():
     import os
-    from glob import glob
     from airflow import settings
     from airflow_repoman.models import DAGRepo
 
@@ -30,10 +29,9 @@ def reposync():
 
     session = settings.Session()
     repos = session.query(DAGRepo).filter(DAGRepo.enabled)
+    for repo in repos.all():
+        print(repo.name)
 
-    for path in glob(os.path.normpath(dag_path + "/*")):
-        path = os.path.basename(path)
-        print(path)
 
 
 if __name__ == "__main__":
