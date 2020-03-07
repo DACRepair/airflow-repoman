@@ -4,6 +4,30 @@ from urllib.parse import urlparse
 import git
 
 
+class GitURL:
+    def __init__(self, url: str, username: str = None, password: str = None):
+        url = urlparse(url)
+        username = username if url.username is None else url.username
+        password = password if url.scheme.lower() != 'ssh' else None
+
+        auth = ''
+        if username is not None and len(username) > 0:
+            auth += username
+            if password is not None:
+                auth += ":{}".format(password)
+        if len(auth) > 0:
+            auth += "@"
+
+        self._url = "{scheme}://{auth}{netloc}{path}"
+        self._url = self._url.format(scheme=url.scheme, auth=auth, netloc=url.netloc, path=url.path)
+
+    def __str__(self):
+        return self._url
+
+    def __repr__(self):
+        return self.__str__()
+
+
 class GitRepo:
     def __init__(self, path: str, remote: str, branch: str = 'master'):
         self.branch = branch if len(branch) > 0 else 'master'
@@ -51,7 +75,8 @@ class GitRepo:
         l_sha = len([x for x in self.repo.refs if not isinstance(x, git.RemoteReference)]) > 0 and l_sha
         l_sha = str(self.repo.head.commit) if l_sha else None
 
-        return l_sha in r_shas and len(remote.refs) > 0 and len(r_shas) > 0
+        retr = l_sha in r_shas and len(remote.refs) > 0 and len(r_shas) > 0
+        return not retr
 
     def update_repo(self):
         if not self.check_repo():
@@ -61,4 +86,3 @@ class GitRepo:
             return len(remote.pull(self.branch)) > 0
         else:
             return False
-
