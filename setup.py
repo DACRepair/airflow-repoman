@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="airflow_repoman",
-    version="0.0.2",
+    version="0.0.3",
 
     author="Derek Vance",
     author_email="DACRepair@gmail.com",
