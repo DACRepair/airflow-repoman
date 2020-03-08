@@ -16,6 +16,6 @@ setup(
                       'click',
                       'gitpython'],
 
-    entry_points={'airflow.plugins': ['airflow_repoman = airflow_repoman.airflow:RepomanAirflowPlugin'],
+    entry_points={'airflow.plugins': ['airflow_repoman = airflow_repoman.plugin:RepomanAirflowPlugin'],
                   'console_scripts': ['airflow-repoman = airflow_repoman.cli:main']}
 )
