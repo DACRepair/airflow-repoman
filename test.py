@@ -1,8 +1,8 @@
 import datetime
 import os
 from airflow import settings
-from airflow_repoman.models import DAGRepo
-from airflow_repoman.git import GitRepo, GitURL
+from airflow_repoman.Common.models import DAGRepo
+from airflow_repoman.Common.git import GitRepo, GitURL
 
 dag_path = os.path.normpath(settings.conf.get('core', 'dags_folder'))
 os.mkdir(dag_path) if not os.path.isdir(dag_path) else None

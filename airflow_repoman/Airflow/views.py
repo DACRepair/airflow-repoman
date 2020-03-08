@@ -6,7 +6,7 @@ from flask_babel import lazy_gettext
 from wtforms.fields import BooleanField, IntegerField, PasswordField, StringField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
-from airflow_repoman.models import DAGRepo
+from airflow_repoman.Common.models import DAGRepo
 
 
 class DAGRepoForm(DynamicForm):

@@ -10,7 +10,7 @@ def main():
 @main.command(help="Initializes the plugin db tables")
 def initdb():
     from airflow import settings
-    from airflow_repoman.models import Base
+    from airflow_repoman.Common.models import Base
     try:
         Base.metadata.create_all(settings.engine)
         log.info("Initialized database.")
