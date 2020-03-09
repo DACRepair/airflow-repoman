@@ -25,10 +25,10 @@ def init():
 
 @main.command(help="Sync Repos")
 @click.option('--continuous', is_flag=True, help="Runs continuously")
-def reposync(loop):
+def reposync(continuous):
     from airflow_repoman.CLI.reposync import click_callable
 
-    click_callable(loop)
+    click_callable(continuous)
 
 
 print(__name__)
