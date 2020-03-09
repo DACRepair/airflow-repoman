@@ -79,10 +79,10 @@ class GitRepo:
         return not retr
 
     def update_repo(self):
-        if not self.check_repo():
+        if self.check_repo():
             remote = self.repo.remote('origin')
-            remote.update()
             remote.fetch(self.branch)
+            remote.update()
             return len(remote.pull(self.branch)) > 0
         else:
             return False
