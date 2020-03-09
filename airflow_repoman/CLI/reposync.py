@@ -11,18 +11,17 @@ from airflow_repoman.Common.git import GitRepo, GitURL
 from airflow_repoman.Common.models import DAGRepo
 
 
-def _clean_path(path):
+def clean_path(path):
+    path = os.path.normpath(path)
     for item in glob.glob(os.path.normpath(path + "/*")):
         if os.path.isfile(item):
-            os.remove(path)
+            os.remove(item)
         if os.path.isdir(item):
-            if len(glob.glob(os.path.normpath(item + "/*"))) > 0:
-                _clean_path(item)
-            os.rmdir(item)
-
-
-def clean_path(path):
-    _clean_path(path)
+            x = glob.glob(os.path.normpath(item + "/*/"))
+            x.append(glob.glob(os.path.normpath(item + "/*")))
+            if len(x) > 0:
+                clean_path(item)
+                os.rmdir(item)
     os.rmdir(path)
 
 
