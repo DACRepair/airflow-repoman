@@ -11,6 +11,22 @@ from airflow_repoman.Common.git import GitRepo, GitURL
 from airflow_repoman.Common.models import DAGRepo
 
 
+def clean_path(path):
+    while True:
+        inventory = glob.glob(os.path.normpath(path + "/*"), recursive=True)
+        files = 0
+        for item in inventory:
+            if os.path.isfile(item):
+                os.remove(item)
+                files += 1
+        if files == 0:
+            for item in inventory:
+                os.rmdir(item)
+        if len(inventory) == 0:
+            break
+    os.rmdir(path)
+
+
 def dagsync():
     dag_path = os.path.normpath(settings.conf.get('core', 'dags_folder'))
 
@@ -41,7 +57,7 @@ def dagsync():
         repo_id = folder.split("_")[-1]
         repo = session.query(DAGRepo).filter(DAGRepo.id == int(repo_id))
         if repo.count() < 1:
-            os.rmdir(folder)
+            clean_path(folder)
 
     interval = session.query(func.min(DAGRepo.interval))
     if interval.count() > 0:
