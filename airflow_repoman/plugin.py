@@ -17,8 +17,4 @@ class RepomanAirflowPlugin(AirflowPlugin):
                          "category": "Admin",
                          "view": DAGRepoView()}]
 
-    admin_views = [DAGRepoAdminView(
-        DAGRepo,
-        settings.Session(),
-        category="Admin",
-        name="DAG Repos")]
+    admin_views = [DAGRepoAdminView(DAGRepo, settings.Session(), category="Admin", name="DAG Repos")]
