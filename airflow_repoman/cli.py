@@ -28,10 +28,9 @@ def init():
 def reposync(continuous):
     from airflow_repoman.CLI.reposync import click_callable
 
+    log.info("Initializing RepoSync...")
     click_callable(continuous)
 
-
-print(__name__)
 
 if __name__ == "__main__":
     main()

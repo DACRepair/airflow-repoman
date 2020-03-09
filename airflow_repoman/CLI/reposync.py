@@ -54,6 +54,7 @@ def click_callable(loop: bool = False):
     while True:
         interval = dagsync()
         if loop:
+            log.debug("Sync complete. Sleeping {} seconds".format(interval))
             time.sleep(interval)
         else:
             break
