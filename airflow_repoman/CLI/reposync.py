@@ -5,9 +5,10 @@ import time
 
 from airflow import settings
 from airflow.logging_config import log
-from airflow_repoman.Common.models import DAGRepo
-from airflow_repoman.Common.git import GitRepo, GitURL
 from sqlalchemy import func
+
+from airflow_repoman.Common.git import GitRepo, GitURL
+from airflow_repoman.Common.models import DAGRepo
 
 
 def dagsync():

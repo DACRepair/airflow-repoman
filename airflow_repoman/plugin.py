@@ -1,5 +1,6 @@
 from airflow import settings
 from airflow.plugins_manager import AirflowPlugin
+
 from airflow_repoman.Airflow.views import DAGRepoView
 from airflow_repoman.Common.models import DAGRepo
 
