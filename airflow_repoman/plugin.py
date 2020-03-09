@@ -8,8 +8,9 @@ from airflow_repoman.Common.models import DAGRepo
 
 class RepomanAirflowPlugin(AirflowPlugin):
     def __init__(self):
-        super(RepomanAirflowPlugin, self).__init__()
         DAGRepo.__table__.create(settings.engine, checkfirst=True)
+
+        super(RepomanAirflowPlugin, self).__init__()
 
     name = "airflow_repoman"
 
