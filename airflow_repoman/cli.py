@@ -1,5 +1,11 @@
+import os
+
 import click
+from airflow import settings
 from airflow.logging_config import log
+
+from airflow_repoman.CLI.reposync import click_callable
+from airflow_repoman.Common.models import Base
 
 
 @click.group()
@@ -9,9 +15,6 @@ def main():
 
 @main.command(help="Initializes the plugin db tables")
 def init():
-    import os
-    from airflow import settings
-    from airflow_repoman.Common.models import Base
     try:
         Base.metadata.create_all(settings.engine)
         log.info("Initialized database.")
@@ -26,8 +29,6 @@ def init():
 @main.command(help="Sync Repos")
 @click.option('--continuous', is_flag=True, help="Runs continuously")
 def reposync(continuous):
-    from airflow_repoman.CLI.reposync import click_callable
-
     log.info("Initializing RepoSync...")
     click_callable(continuous)
 
