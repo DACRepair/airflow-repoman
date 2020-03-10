@@ -25,4 +25,4 @@ Open up a command line and run `airflow-repoman init`. If this does not work, ve
 ## Usage:
 ###Airflow Webserver
 To access the DAG Repos, simply navigate to Admin -> DAG Repos
- 
+![alt text] (https://github.com/DACRepair/airflow-repoman/blob/master/docs/img/adminmenu.png "Menu Location")
