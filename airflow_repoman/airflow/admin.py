@@ -1,8 +1,15 @@
+"""
+flask_admin Plugin (backwards compatibility)
+"""
+
 from flask_admin.contrib.sqla import ModelView
 from wtforms.fields import PasswordField
 
 
 class DAGRepoAdminView(ModelView):
+    """
+    Creates a custom view for the DACRepo model
+    """
     can_view_details = True
     column_details_exclude_list = ['id', 'remote_pass']
 

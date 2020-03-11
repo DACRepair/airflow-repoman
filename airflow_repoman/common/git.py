@@ -1,3 +1,7 @@
+"""
+Tooling for git
+"""
+
 import os
 from urllib.parse import urlparse
 
@@ -5,6 +9,10 @@ import git
 
 
 class GitURL:
+    """
+    Parses a git repo and makes sure the username and password are properly formatted
+    """
+
     def __init__(self, url: str, username: str = None, password: str = None):
         url = urlparse(url)
         username = username if url.username is None else url.username
@@ -29,11 +37,16 @@ class GitURL:
 
 
 class GitRepo:
+    """
+    Object that serializes and has commands for manipulating a git repo
+    """
+
     def __init__(self, path: str, remote: str, branch: str = 'master'):
         self.branch = branch if len(branch) > 0 else 'master'
 
         path = os.path.normpath(path)
-        os.mkdir(path) if not os.path.isdir(path) else None
+        if not os.path.isdir(path):
+            os.mkdir(path)
         self.path = path
 
         try:
@@ -43,26 +56,35 @@ class GitRepo:
 
         if 'origin' not in [str(x) for x in self.repo.remotes] and self._check_url(remote):
             self.repo.create_remote('origin', remote)
-        for r in self.repo.remotes:
-            r: git.Remote
-            if r.name != 'origin':
-                self.repo.delete_remote(r.name)
+        for repo in self.repo.remotes:
+            repo: git.Remote
+            if repo.name != 'origin':
+                self.repo.delete_remote(repo.name)
             else:
-                if remote.lower() not in [x.lower() for x in r.urls]:
-                    r.add_url(remote)
-                for url in r.urls:
+                if remote.lower() not in [x.lower() for x in repo.urls]:
+                    repo.add_url(remote)
+                for url in repo.urls:
                     if str(url).lower() != remote.lower():
-                        self.repo.remote(r.name).delete_url(url)
+                        self.repo.remote(repo.name).delete_url(url)
 
     @staticmethod
     def _check_url(url: str):
-        try:
-            result = urlparse(url)
-            return all([result.scheme, result.netloc, result.path])
-        except:
-            return False
+        """
+        Checks the validity of a URL
+        :param url:
+        :return:
+        """
+        result = urlparse(url)
+        scheme = result.scheme if hasattr(result, "scheme") else False
+        netloc = result.netloc if hasattr(result, "netloc") else False
+        path = result.path if hasattr(result, "path") else False
+        return all([scheme, netloc, path])
 
     def check_repo(self):
+        """
+        Checks to see if a repo needs updates, returns True if it does
+        :return:
+        """
         remote = self.repo.remote('origin')
         remote.update()
 
@@ -72,17 +94,23 @@ class GitRepo:
             r_shas = []
 
         l_sha = self.repo.head.is_valid()
-        l_sha = len([x for x in self.repo.refs if not isinstance(x, git.RemoteReference)]) > 0 and l_sha
+        l_sha = len([
+            ref for ref in self.repo.refs if not isinstance(ref, git.RemoteReference)
+        ]) > 0 and l_sha
         l_sha = str(self.repo.head.commit) if l_sha else None
 
         retr = l_sha in r_shas and len(remote.refs) > 0 and len(r_shas) > 0
         return not retr
 
     def update_repo(self):
+        """
+        Performs a pull on the repo.
+        :return:
+        """
         if self.check_repo():
             remote = self.repo.remote('origin')
             remote.fetch(self.branch)
             remote.update()
             return len(remote.pull(self.branch)) > 0
-        else:
-            return False
+
+        return False
