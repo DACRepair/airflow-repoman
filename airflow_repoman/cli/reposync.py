@@ -46,7 +46,9 @@ def dagsync(no_delete: bool = False):
     for repo in repos.all():
         repo: DAGRepo
 
-        repo_name = "repoman_{}_{}".format(repo.name.replace(" ", "_"), repo.id)
+        repo_name = "repoman_{}_{}_{}".format(repo.name.replace(" ", "_"),
+                                              repo.remote_branch.replace(" ", "_"),
+                                              repo.id)
         repo_path = os.path.normpath("{}/{}".format(dag_path, repo_name))
 
         remote_url = str(GitURL(
