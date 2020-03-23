@@ -78,7 +78,10 @@ def dagsync(no_delete: bool = False):
                 clean_path(folder)
 
     interval = session.query(func.min(DAGRepo.interval))
-    return int(interval.one()[0]) if interval.count() > 0 else 60
+    if interval.count() > 0:
+        return int(interval.one()[0])
+    else:
+        return 60
 
 
 def click_callable(continuous: bool = False, no_delete: bool = False):
