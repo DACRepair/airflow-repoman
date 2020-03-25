@@ -31,6 +31,7 @@ class DAGRepo(Base):
 
     name = Column(String(255))
     enabled = Column(Boolean(), default=True)
+    push_only = Column(Boolean, default=False)
 
     remote_url = Column(String(2048), nullable=False)
     remote_branch = Column(String(64), default='master')
